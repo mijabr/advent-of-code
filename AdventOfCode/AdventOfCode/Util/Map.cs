@@ -24,7 +24,7 @@ namespace AdventOfCode.Util
         public Map(Map other)
         {
             _map = new char[other.Width, other.Height];
-            other._map.CopyTo(_map, 0);
+            Array.Copy(other._map, 0, _map, 0, other._map.Length);
         }
 
         public Map(IEnumerable<Spot> spots, char origin = 's', char fill = '#')
@@ -41,6 +41,12 @@ namespace AdventOfCode.Util
             }
 
             this[new Spot(adjustX, adjusty)] = origin;
+        }
+
+        public Map(int width, int height, char fill = '.')
+        {
+            _map = new char[width, height];
+            Fill(fill);
         }
 
         public int GetDimenstionLength(int dimension) => _map.GetLength(dimension);
@@ -82,10 +88,7 @@ namespace AdventOfCode.Util
 
         public void Fill(char fill) => Spots.ToList().ForEach(s => this[s] = fill);
 
-        public Map Clone()
-        {
-            return new Map(this);
-        }
+        public Map Clone() => new Map(this);
 
         public override string ToString()
         {
