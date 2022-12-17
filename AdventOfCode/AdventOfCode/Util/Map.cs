@@ -88,7 +88,45 @@ namespace AdventOfCode.Util
 
         public void Fill(char fill) => Spots.ToList().ForEach(s => this[s] = fill);
 
+        public void FillLine(Spot from, Spot to, char fill)
+        {
+            this[from] = fill;
+            while (from != to)
+            {
+                from = new Spot(from.X + Compare(from.X, to.X), from.Y + Compare(from.Y, to.Y));
+                this[from] = fill;
+            }
+        }
+
+        private static int Compare(int n1, int n2) => n1 == n2 ? 0 : n1 < n2 ? 1 : -1;
+
         public Map Clone() => new Map(this);
+
+        public char[] Row(int y)
+        {
+            char[] row = new char[Width];
+            for (int x = 0; x < Width; x++)
+            {
+                row[x] = this[x, y];
+            }
+
+            return row;
+        }
+
+        public Map Rows(int start, int end)
+        {
+            var map = new Map(Width, end - start + 1);
+            var dy = 0;
+            for (int y = start; y <= end; y++, dy++)
+            {
+                for (int x = 0; x < Width; x++)
+                {
+                    map[x, dy] = this[x, y];
+                }
+            }
+
+            return map;
+        }
 
         public override string ToString()
         {
@@ -107,5 +145,13 @@ namespace AdventOfCode.Util
         }
     }
 
-    public record struct Spot(int X, int Y);
+    public record struct Spot(int X, int Y)
+    {
+        public Spot(string input) : this(0, 0)
+        {
+            var coords = input.Split(',');
+            X = int.Parse(coords[0]);
+            Y = int.Parse(coords[1]);
+        }
+    }
 }

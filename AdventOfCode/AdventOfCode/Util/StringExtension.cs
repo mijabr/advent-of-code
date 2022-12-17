@@ -17,6 +17,11 @@
             return pos;
         }
 
+        public static T ParseAfter<T>(this string searchString, string after, int startIndex = 0) where T : IParsable<T>
+        {
+            return searchString.Parse<T>(searchString.IndexOf(after, startIndex) + after.Length);
+        }
+
         public static T Parse<T>(this string searchString, int startIndex = 0, IFormatProvider? format = null) where T : IParsable<T>
         {
             var endIndex = searchString.IndexOfNoneOf("-0123456789".ToCharArray(), startIndex);

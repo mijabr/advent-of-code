@@ -11,9 +11,23 @@
             monkeyBusiness.Monkeys[0].Number.Should().Be(0);
             monkeyBusiness.Monkeys[0].Items.Should().BeEquivalentTo(new Queue<int>(new List<int> { 79, 98 }));
             monkeyBusiness.Monkeys[0].Operation.ToString().Should().Be("new = old * 19");
+            monkeyBusiness.Monkeys[0].Test.Should().Be(23);
+            monkeyBusiness.Monkeys[0].TrueMonkey.Should().Be(2);
+            monkeyBusiness.Monkeys[0].FalseMonkey.Should().Be(3);
 
             monkeyBusiness.Monkeys[1].Number.Should().Be(1);
         }
+
+        [Test]
+        public void Test_ShouldFindThePuzzleAnswerForExample1()
+        {
+            var monkeyBusiness = new MonkeyBusiness(_exampleInput);
+
+            monkeyBusiness.RunRounds(20);
+
+            monkeyBusiness.TotalMonkeyBusiness.Should().Be(10605);
+        }
+
 
         [Test]
         public void Test_ShouldFindThePuzzleAnswerForPart1()
@@ -21,6 +35,28 @@
             var monkeyBusiness = new MonkeyBusiness(_puzzleInput);
 
             monkeyBusiness.RunRounds(20);
+
+            monkeyBusiness.TotalMonkeyBusiness.Should().Be(56595);
+        }
+
+        //[Test]
+        public void Test_ShouldFindThePuzzleAnswerForExample2()
+        {
+            var monkeyBusiness = new MonkeyBusiness(_exampleInput, divByThree: false);
+
+            monkeyBusiness.RunRounds(10000);
+
+            monkeyBusiness.TotalMonkeyBusiness.Should().Be(2713310158); // overflow dang it... 
+        }
+
+        //[Test]
+        public void Test_ShouldFindThePuzzleAnswerForPart2()
+        {
+            var monkeyBusiness = new MonkeyBusiness(_puzzleInput, divByThree: false);
+
+            monkeyBusiness.RunRounds(10000);
+
+            monkeyBusiness.TotalMonkeyBusiness.Should().Be(0); // overflow dang it... 
         }
 
         private const string _exampleInput = "Monkey 0:\r\n  Starting items: 79, 98\r\n  Operation: new = old * 19\r\n  Test: divisible by 23\r\n    If true: throw to monkey 2\r\n    If false: throw to monkey 3\r\n\r\nMonkey 1:\r\n  Starting items: 54, 65, 75, 74\r\n  Operation: new = old + 6\r\n  Test: divisible by 19\r\n    If true: throw to monkey 2\r\n    If false: throw to monkey 0\r\n\r\nMonkey 2:\r\n  Starting items: 79, 60, 97\r\n  Operation: new = old * old\r\n  Test: divisible by 13\r\n    If true: throw to monkey 1\r\n    If false: throw to monkey 3\r\n\r\nMonkey 3:\r\n  Starting items: 74\r\n  Operation: new = old + 3\r\n  Test: divisible by 17\r\n    If true: throw to monkey 0\r\n    If false: throw to monkey 1";
