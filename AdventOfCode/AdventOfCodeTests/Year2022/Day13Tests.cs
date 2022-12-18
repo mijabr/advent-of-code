@@ -2,8 +2,115 @@
 {
     public class Day13Tests
     {
-        //[Test]
-        public void SignalDecoder_ShouldFindThePuzzleAnswerForExample1()
+        [Test]
+        public void SignalDecoder_CanIntialiseIntegerSet()
+        {
+            var signalDecoder = new SignalDecoder("[1,1,3,1,1]\r\n[1,1,5,1,1]");
+
+            signalDecoder.Pairs[0].First.Content.Should().BeEquivalentTo(new List<int> { 1, 1, 3, 1, 1 });
+            signalDecoder.Pairs[0].Second.Content.Should().BeEquivalentTo(new List<int> { 1, 1, 5, 1, 1 });
+        }
+
+        [Test]
+        public void SignalDecoder_CanIntialiseListSet()
+        {
+            var signalDecoder = new SignalDecoder("[[1],[2,3,4]]\r\n[[1],4]");
+
+            signalDecoder.Pairs[0].First.Content.Should().BeEquivalentTo(new List<object> { new List<int> { 1 }, new List<int> { 2, 3, 4 } });
+            signalDecoder.Pairs[0].Second.Content.Should().BeEquivalentTo(new List<object> { new List<int> { 1 }, 4 });
+        }
+
+        [Test]
+        public void SignalDecoder_CanIntialiseEmptySet()
+        {
+            var signalDecoder = new SignalDecoder("[[[]]]\r\n[[]]");
+
+            signalDecoder.Pairs[0].First.Content.Should().BeEquivalentTo(new List<object> { new List<object> { new List<int>() } });
+            signalDecoder.Pairs[0].Second.Content.Should().BeEquivalentTo(new List<object> { new List<object>() });
+        }
+
+        [Test]
+        public void SumOfCorrectlyOrderedPairs_ShouldFindDifferentIntInList_pair1()
+        {
+            var signalDecoder = new SignalDecoder("[1,1,3,1,1]\r\n[1,1,5,1,1]");
+
+            var result = signalDecoder.SumOfCorrectlyOrderedPairs();
+
+            result.Should().Be(1);
+        }
+
+        [Test]
+        public void SumOfCorrectlyOrderedPairs_ShouldFindConvertSingleIntToList_pair2()
+        {
+            var signalDecoder = new SignalDecoder("[[1],[2,3,4]]\r\n[[1],4]");
+
+            var result = signalDecoder.SumOfCorrectlyOrderedPairs();
+
+            result.Should().Be(1);
+        }
+
+        [Test]
+        public void SumOfCorrectlyOrderedPairs_ShouldFindConvertSingleIntToList_pair3()
+        {
+            var signalDecoder = new SignalDecoder("[9]\r\n[[8,7,6]]");
+
+            var result = signalDecoder.SumOfCorrectlyOrderedPairs();
+
+            result.Should().Be(0);
+        }
+
+        [Test]
+        public void SumOfCorrectlyOrderedPairs_ShouldFindDifferentSizedLists_pair4()
+        {
+            var signalDecoder = new SignalDecoder("[[4,4],4,4]\r\n[[4,4],4,4,4]");
+
+            var result = signalDecoder.SumOfCorrectlyOrderedPairs();
+
+            result.Should().Be(1);
+        }
+
+        [Test]
+        public void SumOfCorrectlyOrderedPairs_ShouldFindDifferentSizedLists_pair5()
+        {
+            var signalDecoder = new SignalDecoder("[7,7,7,7]\r\n[7,7,7]");
+
+            var result = signalDecoder.SumOfCorrectlyOrderedPairs();
+
+            result.Should().Be(0);
+        }
+
+        [Test]
+        public void SumOfCorrectlyOrderedPairs_ShouldFindDifferentSizedLists_pair6()
+        {
+            var signalDecoder = new SignalDecoder("[]\r\n[3]");
+
+            var result = signalDecoder.SumOfCorrectlyOrderedPairs();
+
+            result.Should().Be(1);
+        }
+
+        [Test]
+        public void SumOfCorrectlyOrderedPairs_ShouldFindDifferentSizedLists_pair7()
+        {
+            var signalDecoder = new SignalDecoder("[[[]]]\r\n[[]]");
+
+            var result = signalDecoder.SumOfCorrectlyOrderedPairs();
+
+            result.Should().Be(0);
+        }
+
+        [Test]
+        public void SumOfCorrectlyOrderedPairs_ShouldFindDifferentSizedLists_pair8()
+        {
+            var signalDecoder = new SignalDecoder("[1,[2,[3,[4,[5,6,7]]]],8,9]\r\n[1,[2,[3,[4,[5,6,0]]]],8,9]");
+
+            var result = signalDecoder.SumOfCorrectlyOrderedPairs();
+
+            result.Should().Be(0);
+        }
+
+        [Test]
+        public void SumOfCorrectlyOrderedPairs_ShouldFindThePuzzleAnswerForExample1()
         {
             var signalDecoder = new SignalDecoder(_exampleInput);
 
@@ -12,14 +119,34 @@
             result.Should().Be(13);
         }
 
-        //[Test]
-        public void SumOfCorrectlyOrderedPairs_ShouldFindThePuzzleAnswerForExample1()
+        [Test]
+        public void SumOfCorrectlyOrderedPairs_ShouldFindThePuzzleAnswerForPart1()
         {
-            var signalDecoder = new SignalDecoder(_exampleInput);
+            var signalDecoder = new SignalDecoder(_puzzleInput);
 
             var result = signalDecoder.SumOfCorrectlyOrderedPairs();
 
-            result.Should().Be(13);
+            result.Should().Be(5390);
+        }
+
+        [Test]
+        public void DecoderKey_ShouldFindThePuzzleAnswerForExample2()
+        {
+            var signalDecoder = new SignalDecoder(_exampleInput);
+
+            var result = signalDecoder.GetDecoderKey();
+
+            result.Should().Be(140);
+        }
+
+        [Test]
+        public void DecoderKey_ShouldFindThePuzzleAnswerForPart2()
+        {
+            var signalDecoder = new SignalDecoder(_puzzleInput);
+
+            var result = signalDecoder.GetDecoderKey();
+
+            result.Should().Be(19261);
         }
 
         private const string _exampleInput = "[1,1,3,1,1]\r\n[1,1,5,1,1]\r\n\r\n[[1],[2,3,4]]\r\n[[1],4]\r\n\r\n[9]\r\n[[8,7,6]]\r\n\r\n[[4,4],4,4]\r\n[[4,4],4,4,4]\r\n\r\n[7,7,7,7]\r\n[7,7,7]\r\n\r\n[]\r\n[3]\r\n\r\n[[[]]]\r\n[[]]\r\n\r\n[1,[2,[3,[4,[5,6,7]]]],8,9]\r\n[1,[2,[3,[4,[5,6,0]]]],8,9]";
