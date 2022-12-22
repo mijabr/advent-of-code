@@ -1,6 +1,6 @@
 ﻿namespace AdventOfCodeTests.Year2022
 {
-    public class Day16XTests
+    public class Day16Tests
     {
         [Test]
         public void ValveTunnels_CanInitialise()

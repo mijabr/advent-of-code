@@ -6,9 +6,12 @@ namespace AdventOfCode.Util
     {
         protected readonly char[,] _map;
 
-        public Map(string map, char defaultContent = '.')
+        public Map(string map, char defaultContent = '.') : this(map.Split("\r\n"), defaultContent)
         {
-            var rows = map.Split("\r\n");
+        }
+
+        public Map(string[] rows, char defaultContent = '.')
+        {
             var width = rows.Max(row => row.Length);
             _map = new char[width, rows.Length];
             for (int y = 0; y < rows.Length; y++)
