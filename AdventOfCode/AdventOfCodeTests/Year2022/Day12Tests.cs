@@ -32,7 +32,7 @@
             result.Should().Be(497);
         }
 
-        [Test]
+        //[Test]
         public void Test_ShouldFindThePuzzleAnswerForPart2()
         {
             var hillClimb = new HillClimb(_puzzleInput);
