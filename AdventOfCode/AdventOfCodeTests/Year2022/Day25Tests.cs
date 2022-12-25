@@ -1,15 +1,11 @@
 ﻿namespace AdventOfCodeTests.Year2022
 {
-    public class DayXTests
+    public class Day25Tests
     {
         [Test]
         public void Test_ShouldFindThePuzzleAnswerForPart1()
         {
-            var thing = new ThingX();
-
-            var result = thing.CountSomething(_puzzleInput);
-
-            result.Should().Be(0);
+            var thing = new ThingX(_puzzleInput);
         }
 
         private const string _puzzleInput = "";

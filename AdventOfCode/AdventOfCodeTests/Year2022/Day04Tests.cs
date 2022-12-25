@@ -3,7 +3,7 @@
     public class Day04Tests
     {
         [Test]
-        public void Test_ShouldGivenThePuzzleAnswer()
+        public void FindWholeyContainedAssignments_ShouldReturnTheCountOfAssignmentsCompletelyContainedInsideAnother_GivenPuzzleInput()
         {
             var assigner = new ElfCleanUpAssignment();
 
@@ -13,7 +13,7 @@
         }
 
         [Test]
-        public void Test_ShouldGivenThePuzzleAnswer_Part2()
+        public void FindAnyOverLapAssignments_ShouldReturnTheCountOfAssignmentsWhichOverlapWithAnother_GivenPuzzleInput()
         {
             var assigner = new ElfCleanUpAssignment();
 

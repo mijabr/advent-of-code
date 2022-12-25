@@ -17,6 +17,7 @@ namespace AdventOfCodeTests.Year2022
             Height = map.Height;
             End = new(Width - 2, Height - 1);
             Start = new(1, 0);
+            PossibleLocations = new() { Start };
         }
 
         public List<Blizzard> Blizzards { get; set; }
@@ -24,14 +25,14 @@ namespace AdventOfCodeTests.Year2022
         public int Width { get; }
         public int Height { get; }
 
-        public HashSet<Spot> PossibleLocations { get; set; } = new() { new(1, 0) };
+        public HashSet<Spot> PossibleLocations { get; private set; }
         public Spot Start { get; }
         public Spot End { get; }
         public int Minutes { get; set; }
 
         public void TickTillDone(int maxMinutes)
         {
-            PossibleLocations = new() { new(1, 0) };
+            PossibleLocations = new() { Start };
             while (!PossibleLocations.Contains(End) && Minutes < maxMinutes)
             {
                 Tick();

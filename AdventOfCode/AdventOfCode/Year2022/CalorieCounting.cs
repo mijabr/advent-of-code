@@ -1,6 +1,6 @@
 ﻿namespace AdventOfCodeTests.Year2022
 {
-    public class ReindeerFoodCalculator
+    public class CalorieCounting
     {
         public int GetHighestCaloriesCarryingCount(string input) => GetCounts(input).Max();
 

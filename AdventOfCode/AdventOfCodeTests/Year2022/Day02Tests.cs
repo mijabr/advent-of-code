@@ -3,9 +3,9 @@
     public class Day02Tests
     {
         [Test]
-        public void Test()
+        public void CalculateScore_ShouldReturnTheScore_GivenOneGame()
         {
-            var rpc = new RockPaperScissorsCalculator();
+            var rpc = new RockPaperScissors();
 
             var result = rpc.CalculateScore("C Z");
 
@@ -13,9 +13,9 @@
         }
 
         [Test]
-        public void Test_ShouldGivenThePuzzleAnswer()
+        public void CalculateScore_ShouldReturnTheScore_PuzzleInput()
         {
-            var rpc = new RockPaperScissorsCalculator();
+            var rpc = new RockPaperScissors();
 
             var result = rpc.CalculateScore(_puzzleInput);
 
@@ -23,9 +23,9 @@
         }
 
         [Test]
-        public void Test_ShouldGivenThePuzzleAnswerPart2()
+        public void CalculateScorePart2_ShouldReturnTheScore_PuzzleInput()
         {
-            var rpc = new RockPaperScissorsCalculator();
+            var rpc = new RockPaperScissors();
 
             var result = rpc.CalculateScorePart2(_puzzleInput);
 

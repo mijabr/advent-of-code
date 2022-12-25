@@ -3,7 +3,7 @@
     public class Day12Tests
     {
         [Test]
-        public void Test_ShouldFindThePuzzleAnswerForExample1()
+        public void FindShortestPathToTopFromStart_ShouldReturnTheShortestPathToTop_GivenExample()
         {
             var hillClimb = new HillClimb(_exampleInput);
 
@@ -13,7 +13,17 @@
         }
 
         [Test]
-        public void Test_ShouldFindThePuzzleAnswerForExample2()
+        public void FindShortestPathToTopFromStart_ShouldReturnTheShortestPathToTop_GivenPuzzleInput()
+        {
+            var hillClimb = new HillClimb(_puzzleInput);
+
+            var result = hillClimb.FindShortestPathToTopFromStart();
+
+            result.Should().Be(497);
+        }
+
+        [Test]
+        public void FindShortestPathToTopFromAnyLowest_ShouldReturnTheShortestPathToTop_GivenExample()
         {
             var hillClimb = new HillClimb(_exampleInput);
 
@@ -23,17 +33,8 @@
         }
 
         [Test]
-        public void Test_ShouldFindThePuzzleAnswerForPart1()
-        {
-            var hillClimb = new HillClimb(_puzzleInput);
-
-            var result = hillClimb.FindShortestPathToTopFromStart();
-
-            result.Should().Be(497);
-        }
-
-        //[Test]
-        public void Test_ShouldFindThePuzzleAnswerForPart2()
+        [Ignore("slow test")]
+        public void FindShortestPathToTopFromAnyLowest_ShouldReturnTheShortestPathToTop_GivenPuzzleInput()
         {
             var hillClimb = new HillClimb(_puzzleInput);
 

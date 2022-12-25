@@ -3,7 +3,7 @@
     public class Day14Tests
     {
         [Test]
-        public void Test_ShouldFindThePuzzleAnswerForExample1()
+        public void DropSand_ShouldFindThePuzzleAnswerForExample1()
         {
             var sandCave = new SandCave(_exampleInput);
 
@@ -13,7 +13,7 @@
         }
 
         [Test]
-        public void Test_ShouldFindThePuzzleAnswerForPart1()
+        public void DropSand_ShouldFindThePuzzleAnswerForPart1()
         {
             var sandCave = new SandCave(_puzzleInput);
 
@@ -23,7 +23,7 @@
         }
 
         [Test]
-        public void Test_ShouldFindThePuzzleAnswerForExample2()
+        public void DropSand_ShouldFindThePuzzleAnswerForExample2()
         {
             var sandCave = new SandCave(_exampleInput, floor: true);
 
@@ -33,7 +33,7 @@
         }
 
         [Test]
-        public void Test_ShouldFindThePuzzleAnswerForPart2()
+        public void DropSand_ShouldFindThePuzzleAnswerForPart2()
         {
             var sandCave = new SandCave(_puzzleInput, floor: true);
 

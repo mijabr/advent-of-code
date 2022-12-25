@@ -2,9 +2,8 @@
 {
     public class ThingX
     {
-        public int CountSomething(string input)
+        public ThingX(string input)
         {
-            return 0;
         }
     }
 }

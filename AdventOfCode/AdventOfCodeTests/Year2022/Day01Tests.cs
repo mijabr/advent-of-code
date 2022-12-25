@@ -5,7 +5,7 @@ namespace AdventOfCodeTests.Year2022
         [Test]
         public void GetHighestCaloriesCarryingCount_ShouldPickTheHighestCount()
         {
-            var reindeerFoodCalculator = new ReindeerFoodCalculator();
+            var reindeerFoodCalculator = new CalorieCounting();
 
             var input =  @"
                 1
@@ -22,7 +22,7 @@ namespace AdventOfCodeTests.Year2022
         [Test]
         public void GetHighestCaloriesCarryingCount_ShouldPickTheHighestSum()
         {
-            var reindeerFoodCalculator = new ReindeerFoodCalculator();
+            var reindeerFoodCalculator = new CalorieCounting();
 
             var input = @"
                 1
@@ -42,7 +42,7 @@ namespace AdventOfCodeTests.Year2022
         [Test]
         public void GetHighestCaloriesCarryingCount_ShouldPickTheHighestSum_GivenNewLineSyntax()
         {
-            var reindeerFoodCalculator = new ReindeerFoodCalculator();
+            var reindeerFoodCalculator = new CalorieCounting();
 
             var input = "1\r\n\r\n2\r\n2\r\n3\r\n\r\n1\r\n4\r\n";
             var count = reindeerFoodCalculator.GetHighestCaloriesCarryingCount(input);
@@ -53,7 +53,7 @@ namespace AdventOfCodeTests.Year2022
         [Test]
         public void GetHighestCaloriesCarryingCount_ShouldGivenThePuzzleAnswer()
         {
-            var reindeerFoodCalculator = new ReindeerFoodCalculator();
+            var reindeerFoodCalculator = new CalorieCounting();
 
             var count = reindeerFoodCalculator.GetHighestCaloriesCarryingCount(_puzzleInput);
 
@@ -63,7 +63,7 @@ namespace AdventOfCodeTests.Year2022
         [Test]
         public void GetSumOfHighestThreeCaloriesCarryingCount_ShouldGivenThePuzzleAnswer()
         {
-            var reindeerFoodCalculator = new ReindeerFoodCalculator();
+            var reindeerFoodCalculator = new CalorieCounting();
 
             var count = reindeerFoodCalculator.GetSumOfHighestThreeCaloriesCarryingCount(_puzzleInput);
 

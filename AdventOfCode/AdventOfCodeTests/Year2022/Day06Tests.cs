@@ -3,7 +3,7 @@
     public class Day06Tests
     {
         [Test]
-        public void Test_ShouldGivenThePuzzleAnswerForPart1()
+        public void FindUniqueOffset_ShouldReturnTheStartOfUniqueSignal_GivenPuzzleInput_And4UniqueLength()
         {
             var thing = new MessageDecoder();
 
@@ -11,8 +11,9 @@
 
             result.Should().Be(1920);
         }
+
         [Test]
-        public void Test_ShouldGivenThePuzzleAnswerForPart2()
+        public void FindUniqueOffset_ShouldReturnTheStartOfUniqueSignal_GivenPuzzleInput_And14UniqueLength()
         {
             var thing = new MessageDecoder();
 

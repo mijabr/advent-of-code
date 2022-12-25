@@ -19,7 +19,7 @@
         }
 
         [Test]
-        public void Test_ShouldFindThePuzzleAnswerForExample1()
+        public void TotalMonkeyBusiness_ShouldReturnSumOfMadness_GivenExampleInput()
         {
             var monkeyBusiness = new MonkeyBusiness(_exampleInput);
 
@@ -30,7 +30,7 @@
 
 
         [Test]
-        public void Test_ShouldFindThePuzzleAnswerForPart1()
+        public void TotalMonkeyBusiness_ShouldReturnSumOfMadness_GivenPuzzleInput()
         {
             var monkeyBusiness = new MonkeyBusiness(_puzzleInput);
 
@@ -40,7 +40,7 @@
         }
 
         //[Test]
-        public void Test_ShouldFindThePuzzleAnswerForExample2()
+        public void TotalMonkeyBusiness_ShouldReturnSumOfMadness_GivenExampleInput_AndNoDivideBy3()
         {
             var monkeyBusiness = new MonkeyBusiness(_exampleInput, divByThree: false);
 
@@ -50,7 +50,7 @@
         }
 
         //[Test]
-        public void Test_ShouldFindThePuzzleAnswerForPart2()
+        public void TotalMonkeyBusiness_ShouldReturnSumOfMadness_GivenPuzzleInput_AndNoDivideBy3()
         {
             var monkeyBusiness = new MonkeyBusiness(_puzzleInput, divByThree: false);
 

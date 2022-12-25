@@ -1,6 +1,6 @@
 ﻿namespace AdventOfCodeTests.Year2022
 {
-    public class RockPaperScissorsCalculator
+    public class RockPaperScissors
     {
         private const char HimRock = 'A';
         private const char HimPaper = 'B';
