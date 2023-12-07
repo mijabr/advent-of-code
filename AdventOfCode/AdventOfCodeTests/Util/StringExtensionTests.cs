@@ -31,5 +31,13 @@ namespace AdventOfCodeTests.Util
             searchString.Parse<int>(4).Should().Be(456);
             searchString.Parse<int>(8).Should().Be(789);
         }
+
+        [TestCase("Time:        57     72     69     92", new int[] { 57, 72, 69, 92 })]
+        [TestCase("123", new int[] { 123 })]
+        [TestCase("9,8,7", new int[] { 9, 8, 7 })]
+        public void ParseNumbers_ShouldParseNumbersAfterGivenString(string searchString, int[] expected)
+        {
+            searchString.ParseNumbers<int>().Should().BeEquivalentTo(expected);
+        }
     }
 }
