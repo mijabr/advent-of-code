@@ -107,7 +107,7 @@ namespace AdventOfCodeTests.Year2022
     {
         public int Compare(Packet? x, Packet? y)
         {
-            return CompareIntOrList(x.Content, y.Content);
+            return CompareIntOrList(x?.Content ?? new List<object>(), y?.Content ?? new List<object>());
         }
 
         public static int CompareIntOrList(object first, object second)

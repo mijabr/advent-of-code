@@ -64,7 +64,7 @@ namespace AdventOfCodeTests.Year2022
             var monkeyValue = monkeyLeft.Number != null ? monkeyLeft : monkeyRight;
             var monkeyNext = monkeyLeft.Number != null ? monkeyRight : monkeyLeft;
 
-            double value = monkeyValue.Number.Value;
+            double value = monkeyValue.Number.HasValue ? monkeyValue.Number.Value : 0;
             var ops = new List<Op>();
             monkeyNext.FindOps(Monkeys, ops);
 
@@ -108,6 +108,8 @@ namespace AdventOfCodeTests.Year2022
             if ("0123456789".Contains(input[6]))
             {
                 Number = input.Parse<long>(6);
+                MonkeyLeft = string.Empty;
+                MonkeyRight = string.Empty;
             }
             else
             {
@@ -147,7 +149,7 @@ namespace AdventOfCodeTests.Year2022
             var monkeyValue = monkeyLeft.Number != null ? monkeyLeft : monkeyRight;
             var monkeyNext = monkeyLeft.Number != null ? monkeyRight : monkeyLeft;
 
-            ops.Add(new Op { Operation = Operation, Number = monkeyValue.Number.Value});
+            ops.Add(new Op { Operation = Operation, Number = monkeyValue.Number.HasValue ? monkeyValue.Number.Value : 0});
 
             monkeyNext.FindOps(monkeys, ops);
         }
@@ -173,6 +175,7 @@ namespace AdventOfCodeTests.Year2022
             '+' => '-',
             '/' => '*',
             '*' => '/',
+            _ => throw new NotSupportedException()
         };
 
         public double Number { get; set; }
