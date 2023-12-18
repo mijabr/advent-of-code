@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Text;
 
 namespace AdventOfCode.Util
 {
@@ -177,7 +178,7 @@ namespace AdventOfCode.Util
         }
     }
 
-    public record struct Spot(int X, int Y)
+    public record struct Spot(int X, int Y) : IEqualityComparer<Spot>
     {
         public Spot(string input) : this(0, 0)
         {
@@ -194,6 +195,16 @@ namespace AdventOfCode.Util
         public Spot SouthWest => new(X - 1, Y + 1);
         public Spot West => new(X - 1, Y);
         public Spot NorthWest => new(X - 1, Y - 1);
+
+        public bool Equals(Spot a, Spot b)
+        {
+            return a.X == b.X && a.Y == b.Y;
+        }
+
+        public int GetHashCode([DisallowNull] Spot obj)
+        {
+            return obj.Y * 17 + obj.X;
+        }
 
         public override string ToString() => $"({X}, {Y})";
     }

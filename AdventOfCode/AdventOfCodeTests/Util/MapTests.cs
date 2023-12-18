@@ -8,7 +8,7 @@ namespace AdventOfCodeTests.Util
         {
             public Map Map { get; }
 
-            public TestState(string initial = null)
+            public TestState(string? initial = null)
             {
                 Map = new Map(initial ?? _defaultMap);
             }
