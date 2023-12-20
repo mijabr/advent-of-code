@@ -22,7 +22,7 @@ namespace AdventOfCodeTests.Year2023
         }
 
         [Test]
-        public void PartChecker_SolveExample1()
+        public void PartChecker_CanSolveExample1()
         {
             var partChecker = new PartChecker(exampleInput1);
 
@@ -30,11 +30,35 @@ namespace AdventOfCodeTests.Year2023
         }
 
         [Test]
-        public void PartChecker_SolvePart1()
+        public void PartChecker_CanSolvePart1()
         {
             var partChecker = new PartChecker(input);
 
             partChecker.SumPartRatings().Should().Be(323625);
+        }
+
+        [Test]
+        public void PartChecker_CanSolveSimpleInputPart2()
+        {
+            new PartChecker("in{x>3999:A,R}\r\n\r\n{x=1,m=1,a=1,s=1}").CountAllAcceptedPartTypes().Should().Be(1 * 4000L * 4000L * 4000L);
+            new PartChecker("in{x<2:A,R}\r\n\r\n{x=1,m=1,a=1,s=1}").CountAllAcceptedPartTypes().Should().Be(1 * 4000L * 4000L * 4000L);
+            new PartChecker("in{x<2:A,m<2:A,R}\r\n\r\n{x=1,m=1,a=1,s=1}").CountAllAcceptedPartTypes().Should().Be((1 * 4000L * 4000L * 4000L) + (3999L * 1 * 4000L * 4000L));
+        }
+
+        [Test]
+        public void PartChecker_CanSolveExample1Part2()
+        {
+            var partChecker = new PartChecker(exampleInput1);
+
+            partChecker.CountAllAcceptedPartTypes().Should().Be(167409079868000);
+        }
+
+        [Test]
+        public void PartChecker_CanSolvePart2()
+        {
+            var partChecker = new PartChecker(input);
+
+            partChecker.CountAllAcceptedPartTypes().Should().Be(127447746739409);
         }
 
         const string exampleInput1 = "px{a<2006:qkq,m>2090:A,rfg}\r\npv{a>1716:R,A}\r\nlnx{m>1548:A,A}\r\nrfg{s<537:gd,x>2440:R,A}\r\nqs{s>3448:A,lnx}\r\nqkq{x<1416:A,crn}\r\ncrn{x>2662:A,R}\r\nin{s<1351:px,qqz}\r\nqqz{s>2770:qs,m<1801:hdj,R}\r\ngd{a>3333:R,R}\r\nhdj{m>838:A,pv}\r\n\r\n{x=787,m=2655,a=1222,s=2876}\r\n{x=1679,m=44,a=2067,s=496}\r\n{x=2036,m=264,a=79,s=2244}\r\n{x=2461,m=1339,a=466,s=291}\r\n{x=2127,m=1623,a=2188,s=1013}";

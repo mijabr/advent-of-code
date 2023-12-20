@@ -44,7 +44,110 @@ namespace AdventOfCode.Year2023
 
             return acceptedParts.Sum(p => p.Total);
         }
+
+        public long CountAllAcceptedPartTypes()
+        {
+            var workingInstructionTree = new List<InstructionBranch>
+            {
+                new InstructionBranch(new InstructionBranchInstruction(new PartCheckerWorkflowInstruction("in"), "pre-in-->"))
+            };
+
+            var acceptedInstructionTree = new List<InstructionBranch>();
+            while (workingInstructionTree.Count > 0)
+            {
+                var destination = workingInstructionTree[0].Instructions[^1].Instruction.Destination;
+                if (destination == "A")
+                {
+                    acceptedInstructionTree.Add(workingInstructionTree[0]);
+                    workingInstructionTree.RemoveAt(0);
+                }
+                else if (destination == "R" || workingInstructionTree[0].Instructions.Any(i => i.Workflow == destination))
+                {
+                    workingInstructionTree.RemoveAt(0);
+                }
+                else
+                {
+                    var workflow = Workflows[destination];
+                    var inverseInstructions = new List<InstructionBranchInstruction>();
+                    var clone = new InstructionBranch(workingInstructionTree[0].Instructions);
+                    for (int n = 0;n < workflow.Instructions.Count; n++)
+                    {
+                        var instruction = new InstructionBranchInstruction(workflow.Instructions[n], destination);
+                        var inverseInstruction = new InstructionBranchInstruction(workflow.Instructions[n].Inverse(), destination);
+                        if (n == 0)
+                        {
+                            workingInstructionTree[0].Instructions.Add(instruction);
+                        }
+                        else
+                        {
+                            var nextClone = new InstructionBranch(clone.Instructions);
+                            clone.Instructions.AddRange(inverseInstructions);
+                            clone.Instructions.Add(instruction);
+                            workingInstructionTree.Add(clone);
+                            clone = nextClone;
+                        }
+
+                        inverseInstructions.Add(inverseInstruction);
+                    }
+                }
+            }
+
+            var partCounts = acceptedInstructionTree.Select(t =>
+            {
+                long[] min = { 1, 1, 1, 1 };
+                long[] max = { 4000, 4000, 4000, 4000 };
+                foreach (var instruction in t.Instructions)
+                {
+                    int instructionVariable = instruction.Instruction.VariableName switch
+                    {
+                        'x' => 0,
+                        'm' => 1,
+                        'a' => 2,
+                        's' => 3,
+                        _ => 4
+                    };
+
+                    switch (instruction.Instruction.Operation)
+                    {
+                        case '<':
+                            max[instructionVariable] = Math.Min(instruction.Instruction.Value - 1 ?? 4000, max[instructionVariable]);
+                            break;
+                        case '>':
+                            min[instructionVariable] = Math.Max(instruction.Instruction.Value + 1 ?? 0, min[instructionVariable]);
+                            break;
+                    };
+                }
+
+                return (max[0] - min[0] + 1) * (max[1] - min[1] + 1) * (max[2] - min[2] + 1) * (max[3] - min[3] + 1);
+            });
+
+            return partCounts.Sum();
+        }
     }
+
+    public class InstructionBranch
+    {
+        public InstructionBranch(InstructionBranchInstruction instruction)
+        {
+            Instructions.Add(instruction);
+        }
+
+        public InstructionBranch(List<InstructionBranchInstruction> instructions)
+        {
+            Instructions.AddRange(instructions);
+        }
+
+        public List<InstructionBranchInstruction> Instructions { get; private set; } = new();
+
+        public InstructionBranch CloneAndAdd(InstructionBranchInstruction instruction)
+        {
+            var instructionBranch = new InstructionBranch(Instructions);
+            instructionBranch.Instructions.Add(instruction);
+            return instructionBranch;
+        }
+    }
+
+    public record InstructionBranchInstruction(PartCheckerWorkflowInstruction Instruction, string Workflow);
 
     public class PartCheckerWorkflow
     {
@@ -62,7 +165,7 @@ namespace AdventOfCode.Year2023
         {
             foreach (var instruction in Instructions)
             {
-                if (!instruction.VariableName.HasValue)
+                if (instruction.IsDefaultOperation)
                 {
                     return instruction.Destination;
                 }
@@ -111,10 +214,27 @@ namespace AdventOfCode.Year2023
             }
         }
 
+        private PartCheckerWorkflowInstruction()
+        {
+            Destination = string.Empty;
+        }
+
         public char? VariableName { get; private set; }
         public char? Operation { get; private set; }
         public long? Value { get; private set; }
         public string Destination { get; private set; }
+        public bool IsDefaultOperation => VariableName == null;
+
+        public PartCheckerWorkflowInstruction Inverse()
+        {
+            return new PartCheckerWorkflowInstruction
+            {
+                VariableName = VariableName,
+                Operation = Operation == '<' ? '>' : '<',
+                Value = Operation == '<' ? Value - 1 : Value + 1,
+                Destination = Destination 
+            };
+        }
     }
 
     public class PartCheckerPart
