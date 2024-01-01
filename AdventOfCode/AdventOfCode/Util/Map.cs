@@ -70,6 +70,7 @@ namespace AdventOfCode.Util
         public bool IsRightEdge(Spot spot) => spot.X == Width - 1;
         public static bool IsTopEdge(Spot spot) => spot.Y == 0;
         public bool IsBottomEdge(Spot spot) => spot.Y == Height - 1;
+        public bool IsInBounds(Spot spot) => spot.X >= 0 && spot.X < Width && spot.Y >= 0 && spot.Y < Height;
 
         public char this[int x, int y]
         {
@@ -174,6 +175,47 @@ namespace AdventOfCode.Util
             {
                 this[0, y] = fillchar;
                 this[Width - 1, y] = fillchar;
+            }
+        }
+
+        public void FloodFill(Spot seed, char fill, char boundary)
+        {
+            if (this[seed] == boundary || this[seed] == fill)
+            {
+                return;
+            }
+
+            this[seed] = fill;
+
+            var seedSpots = new List<Spot> { seed };
+            while (seedSpots.Count > 0)
+            {
+                var nextSeedSpots = new List<Spot>();
+                foreach (var spot in seedSpots)
+                {
+                    if (IsInBounds(spot.East) && this[spot.East] != boundary && this[spot.East] != fill)
+                    {
+                        nextSeedSpots.Add(spot.East);
+                        this[spot.East] = fill;
+                    }
+                    if (IsInBounds(spot.West) && this[spot.West] != boundary && this[spot.West] != fill)
+                    {
+                        nextSeedSpots.Add(spot.West);
+                        this[spot.West] = fill;
+                    }
+                    if (IsInBounds(spot.South) && this[spot.South] != boundary && this[spot.South] != fill)
+                    {
+                        nextSeedSpots.Add(spot.South);
+                        this[spot.South] = fill;
+                    }
+                    if (IsInBounds(spot.North) && this[spot.North] != boundary && this[spot.North] != fill)
+                    {
+                        nextSeedSpots.Add(spot.North);
+                        this[spot.North] = fill;
+                    }
+                }
+
+                seedSpots = nextSeedSpots;
             }
         }
     }
