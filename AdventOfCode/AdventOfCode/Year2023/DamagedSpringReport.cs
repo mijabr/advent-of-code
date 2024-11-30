@@ -38,11 +38,11 @@ namespace AdventOfCode.Year2023
 
         public int Row { get; }
         public string Arrangement { get; set; }
-        public string FoldedArrangement { get; set; }
-        public List<int> FoldedDamagedLength { get; set; }
+        public string FoldedArrangement { get; set; } = string.Empty;
+        public List<int> FoldedDamagedLength { get; set; } = [];
         public List<int> DamagedLength { get; set; }
-        public List<int> DamagedStartMin { get; set; }
-        public List<int> DamagedStartMax { get; set; }
+        public List<int> DamagedStartMin { get; set; } = [];
+        public List<int> DamagedStartMax { get; set; } = [];
         public bool Unfolded { get; set; }
         public bool Power5 { get; set; }
 
