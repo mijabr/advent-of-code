@@ -5,25 +5,25 @@ namespace AdventOfCodeTests.Year2024
     public class Day05Tests
     {
         [Test]
-        public void ComputerMultiplier_ShouldSolveTestInput()
+        public void ManualPageOrder_FindSumOfCorrectOrders_ShouldSolveTestInput()
         {
             ManualPageOrder.FindSumOfCorrectOrders(_puzzleTestInput).Should().Be(143);
         }
 
         [Test]
-        public void ComputerMultiplier_ShouldSolveInput()
+        public void ManualPageOrder_FindSumOfCorrectOrders_ShouldSolveInput()
         {
             ManualPageOrder.FindSumOfCorrectOrders(_puzzleInput).Should().Be(6242);
         }
 
         [Test]
-        public void ComputerMultiplier_ShouldSolveTestInputPart2()
+        public void ManualPageOrder_FindSumOfIncorrectOrders_ShouldSolveTestInputPart2()
         {
             ManualPageOrder.FindSumOfIncorrectOrders(_puzzleTestInput).Should().Be(123);
         }
 
         [Test]
-        public void ComputerMultiplier_ShouldSolveInputPart2()
+        public void ManualPageOrder_FindSumOfIncorrectOrders_ShouldSolveInputPart2()
         {
             ManualPageOrder.FindSumOfIncorrectOrders(_puzzleInput).Should().Be(5169);
         }

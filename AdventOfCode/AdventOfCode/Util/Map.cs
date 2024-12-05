@@ -71,6 +71,8 @@ namespace AdventOfCode.Util
         public static bool IsTopEdge(Spot spot) => spot.Y == 0;
         public bool IsBottomEdge(Spot spot) => spot.Y == Height - 1;
         public bool IsInBounds(Spot spot) => spot.X >= 0 && spot.X < Width && spot.Y >= 0 && spot.Y < Height;
+        public char Get(Spot spot) => IsInBounds(spot) ? this[spot] : '\0';
+        public char Get(int x, int y) => Get(new Spot(x, y));
 
         public char this[int x, int y]
         {
