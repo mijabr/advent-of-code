@@ -44,5 +44,16 @@
 
             return nextCombos;
         }
+
+        public static IEnumerable<(T, T)> Combinations<T>(this List<T> list)
+        {
+            for (var n1 = 0; n1 < list.Count + 1; n1++)
+            {
+                for (var n2 = n1 + 1; n2 < list.Count; n2++)
+                {
+                    yield return (list[n1], list[n2]);
+                }
+            }
+        }
     }
 }
