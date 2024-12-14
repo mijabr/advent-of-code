@@ -5,25 +5,25 @@ namespace AdventOfCodeTests.Year2024
     public class Day12Tests
     {
         [Test]
-        public void DiskCompactor_GetChecksum_ShouldSolveTestInput()
+        public void FenceCostCalculator_SumCostOfAllFences_ShouldSolveTestInput()
         {
             FenceCostCalculator.SumCostOfAllFences(_puzzleTestInput).Should().Be(1930);
         }
 
         [Test]
-        public void DiskCompactor_GetChecksum_ShouldSolveInput()
+        public void FenceCostCalculator_SumCostOfAllFences_ShouldSolveInput()
         {
             FenceCostCalculator.SumCostOfAllFences(_puzzleInput).Should().Be(1377008);
         }
 
         [Test]
-        public void DiskCompactor_GetChecksum_ShouldSolveTestInputPart2()
+        public void FenceCostCalculator_SumCostOfAllFences_ShouldSolveTestInputPart2()
         {
             FenceCostCalculator.SumCostOfAllFences(_puzzleTestInput, true).Should().Be(1206);
         }
 
         [Test]
-        public void DiskCompactor_GetChecksum_ShouldSolveInputPart2()
+        public void FenceCostCalculator_SumCostOfAllFences_ShouldSolveInputPart2()
         {
             FenceCostCalculator.SumCostOfAllFences(_puzzleInput, true).Should().Be(815788);
         }
