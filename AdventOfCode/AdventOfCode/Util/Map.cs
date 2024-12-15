@@ -239,6 +239,14 @@ namespace AdventOfCode.Util
         public Spot SouthWest => new(X - 1, Y + 1);
         public Spot West => new(X - 1, Y);
         public Spot NorthWest => new(X - 1, Y - 1);
+        public Spot InDirection(Direction direction) => direction switch
+        {
+            Direction.North => North,
+            Direction.East => East,
+            Direction.South => South,
+            Direction.West => West,
+            _ => throw new NotSupportedException()
+        };
 
         public bool Equals(Spot a, Spot b)
         {
@@ -251,5 +259,13 @@ namespace AdventOfCode.Util
         }
 
         public override string ToString() => $"({X}, {Y})";
+    }
+    public enum Direction
+    {
+        Invalid,
+        North,
+        East,
+        South,
+        West
     }
 }
