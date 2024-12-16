@@ -260,6 +260,7 @@ namespace AdventOfCode.Util
 
         public override string ToString() => $"({X}, {Y})";
     }
+
     public enum Direction
     {
         Invalid,
@@ -267,5 +268,27 @@ namespace AdventOfCode.Util
         East,
         South,
         West
+    }
+
+    public static class EnumExtensions
+    {
+        public static Direction TurnLeft(this Direction direction) =>
+            direction switch
+            {
+                Direction.North => Direction.West,
+                Direction.East => Direction.North,
+                Direction.South => Direction.East,
+                Direction.West => Direction.South,
+                _ => throw new NotSupportedException()
+            };
+        public static Direction TurnRight(this Direction direction) =>
+            direction switch
+            {
+                Direction.North => Direction.East,
+                Direction.East => Direction.South,
+                Direction.South => Direction.West,
+                Direction.West => Direction.North,
+                _ => throw new NotSupportedException()
+            };
     }
 }
